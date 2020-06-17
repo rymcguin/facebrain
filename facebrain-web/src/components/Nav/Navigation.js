@@ -9,7 +9,7 @@ const Navigation = ({ onRouteChange, signedIn }) => {
 					<Logo />
 				</div>
 				<div>
-					<p onClick={() => onRouteChange('signout')} className='f3 link dim white ba-black br2 pa2 shadow-3 pointer'>Sign Out</p>
+					<p onClick={() => onRouteChange('signout')} className='f3 link dim  ba br2 pa2 shadow-3 pointer'>Sign Out</p>
 				</div>
 			</nav>
 		);
@@ -21,10 +21,10 @@ const Navigation = ({ onRouteChange, signedIn }) => {
 				</div>
 				<div style={{ display: 'flex',  justifyContent: 'space-between' }}>
 					<div  style={{marginRight:'20px'}}>
-						<p onClick={() => onRouteChange('signin')} className='f3 grow link dim white ba-black br2 pa2 shadow-3 pointer'>Sign In</p>
+						<p onClick={() => onRouteChange('signin')} className='f3 grow link dim black ba br2 pa2 shadow-3 pointer'>Sign In</p>
 					</div>
 					<div style={{marginRight:'20px'}}>
-						<p onClick={() => onRouteChange('Register')} className='f3 grow link dim white ba-black br2 pa2 shadow-3 pointer'>Register</p>
+						<p onClick={() => onRouteChange('Register')} className='f3 grow link dim black ba br2 pa2 shadow-3 pointer'>Register</p>
 					</div>
 
 				</div>

@@ -1,14 +1,18 @@
 import React from 'react';
 //import './Rank.css';
 
-const Rank = () => {
+const Rank = ({name, entries}) => {
 	return (
 		<div>
-			<div className='white f3'>
+			<div className='black f5 ul'>
 				{'Ryan\'s Face Detection App'}
 			</div>
-			<div className='white f1'>
-				{''}
+			<br/>
+			<div className='black f3'>
+				{'Current Entry Count:'}
+			</div>
+			<div className='black f1'>
+				{entries}
 			</div>
 		</div>
 	)
