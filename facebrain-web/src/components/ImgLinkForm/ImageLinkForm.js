@@ -4,7 +4,7 @@ import './ImageLinkForm.css';
 const ImageLinkForm = ({onInputChange, onButtonSubmit}) => {
 	return (
 		<div>
-			<p className='f3 white'>
+			<p className='f3 black'>
 				Enter Image
 			</p>
 			<div className='center' >
