@@ -5,7 +5,7 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit}) => {
 	return (
 		<div>
 			<p className='f3 black'>
-				Enter Image
+				Enter Image URL
 			</p>
 			<div className='center' >
 				<div className = ' center form pa4 br3 shadow-5' >
