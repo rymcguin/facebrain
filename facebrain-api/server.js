@@ -3,7 +3,13 @@ const bcrypt = require("bcrypt-nodejs");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const knex = require("knex");
+
 const { resolve } = require("path");
+const register = require("./controllers/register.js");
+const signin = require("./controllers/signin.js");
+const profile = require("./controllers/profile.js");
+const image = require("./controllers/image.js");
+
 
 const database = knex({
   client: "pg",
@@ -28,79 +34,23 @@ app.get("/", (req, res) => {
 });
 
 app.post("/signin", (req, res) => {
-  database.select('email','hash').from('login')
-  .where('email', '=', req.body.email)
-  .then(data => {
-    const isValid = bcrypt.compareSync(req.body.password, data[0].hash);
-    if(isValid){
-      return database.select('*').from('users')
-      .where('email', '=', req.body.email)
-      .then(user => {
-        res.json(user[0])
-      })
-      .catch(err => res.status(400).json("unable to get user"))
-    }else{
-      res.status(400).json("wrong credentials")
-    }
-  })
-  .catch(err => res.status(400).json('Wrong email or password has been entered'))
+  signin.handleSignin(req, res, database, bcrypt);
 });
 
 app.post("/register", (req, res) => {
-  const { email, name, password } = req.body;
-  const hash = bcrypt.hashSync(password);
-  database
-    .transaction((trx) => {
-      trx.insert({
-          hash: hash,
-          email: email
-        })
-        .into('login')
-        .returning('email')
-        .then((loginEmail) => {
-          return trx('users')
-            .returning('*')
-            .insert({
-              name: name,
-              email: loginEmail[0],
-              joined: new Date(),
-            })
-            .then((user) => {
-              res.json(user[0]);
-            })
-        })
-        .then(trx.commit)
-        .catch(trx.rollback)
-    })
-    .catch(err => res.status(400).json("account already exists"));
+  register.handleRegister(req, res, database, bcrypt);
 });
 
 app.get("/profile/:id", (req, res) => {
-  const { id } = req.params;
-  database
-    .select("*")
-    .from("users")
-    .where({ id })
-    .then((user) => {
-      if (users.length) {
-        res.json(user[0]);
-      } else {
-        res.status(400).json("not found");
-      }
-    })
-    .catch((err) => res.status(400).json("error fetching user"));
+  profile.handleProfile(req, res, database);
 });
 
 app.put("/image", (req, res) => {
-  const { id } = req.body;
-  database("users")
-    .where("id", "=", id)
-    .increment("entries", 1)
-    .returning("entries")
-    .then((entries) => {
-      res.json(entries[0]);
-    })
-    .catch((err) => res.status(400).json("unable to get entries"));
+  image.handleImage(req, res, database);
+});
+
+app.post("/imageurl", (req, res) => {
+  image.handleApiCall(req, res);
 });
 
 app.listen(3000, () => {
