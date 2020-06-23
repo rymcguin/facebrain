@@ -8,7 +8,6 @@ import Rank from "./components/Rank/Rank.js";
 import SignIn from "./components/SignIn/SignIn.js";
 import Register from "./components/Register/Register.js";
 import "./App.css";
-import { response } from "express";
 
 const particlesOptions = {
   particles: {
