@@ -26,12 +26,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
-  database
-    .select("*")
-    .from("users")
-    .then((users) => res.json(users));
-});
+app.get("/", (req, res) => {res.send('it is working')});
 
 app.post("/signin", (req, res) => {
   signin.handleSignin(req, res, database, bcrypt);
@@ -53,6 +48,6 @@ app.post("/imageurl", (req, res) => {
   image.handleApiCall(req, res);
 });
 
-app.listen(3000, () => {
-  console.log("app is runnin on port 3000");
+app.listen(process.env.PORT || 3000, () => {
+  console.log("app is runnin on port ${process.env.PORT}");
 });
