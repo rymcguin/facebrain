@@ -95,7 +95,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({ imgURL: this.state.input });
-    fetch("http://localhist:3000/imageurl", {
+    fetch("https://evening-falls-32145.herokuapp.com/imageurl", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -105,7 +105,7 @@ class App extends Component {
       .then((response) => response.json())
       .then((response) => {
         if (response) {
-          fetch("http://localhost:3000/image", {})
+          fetch("https://evening-falls-32145.herokuapp.com/image", {})
             .then((response) => response.json())
             .then((count) => {
               this.setState(Object.assign(this.state.user, { entries: count }));
