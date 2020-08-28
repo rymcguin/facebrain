@@ -16,24 +16,22 @@ class SignIn extends React.Component {
     this.setState({ signInPassword: event.target.value });
   };
   onSubmitSignIn = () => {
-	  fetch('https://evening-falls-32145.herokuapp.com/signin', {
-		  method: 'post',
-		  headers:{'Content-Type': 'application/json'},
-		  body: JSON.stringify({
-			  email: this.state.signInEmail,
-			  password:this.state.signInPassword,
-		  })
-	  })
-	.then(response => response.json())
-	.then(user => {
-		if(user.id){
-			this.props.loadUser(user);
-			this.props.onRouteChange("home");
-		}else{
-
-		}
-	})
-    
+    fetch("https://evening-falls-32145.herokuapp.com/signin", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: this.state.signInEmail,
+        password: this.state.signInPassword,
+      }),
+    })
+      .then((response) => response.json())
+      .then((user) => {
+        if (user.id) {
+          this.props.loadUser(user);
+          this.props.onRouteChange("home");
+        } else {
+        }
+      });
   };
   render() {
     const { onRouteChange } = this.props;
@@ -44,7 +42,10 @@ class SignIn extends React.Component {
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0 white">
               <legend className="f2 fw6 ph0 mh0 black">Sign In</legend>
               <div className="mt3">
-                <label className="db fw6 lh-copy f6 black" htmlFor="email-address">
+                <label
+                  className="db fw6 lh-copy f6 black"
+                  htmlFor="email-address"
+                >
                   Email
                 </label>
                 <input
@@ -56,14 +57,14 @@ class SignIn extends React.Component {
                 />
               </div>
               <div className="mv3">
-                <label className="db fw6 lh-copy f6 black"  htmlFor="password">
+                <label className="db fw6 lh-copy f6 black" htmlFor="password">
                   Password
                 </label>
                 <input
                   onChange={this.onPasswordChange}
                   className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-				  type="password"
-				  name="password"
+                  type="password"
+                  name="password"
                   id="password"
                 />
               </div>
